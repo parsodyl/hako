@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hako/src/hako_event_stream_mixin.dart';
-import 'package:hako/src/hako_events_contract.dart';
+import 'package:hako/src/event_stream/hako_event_stream_mixin.dart';
+import 'package:hako/src/contracts/hako_events_contract.dart';
 
 void main() {
   group(

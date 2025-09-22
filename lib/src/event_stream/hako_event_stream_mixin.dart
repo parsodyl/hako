@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
-import 'package:hako/src/hako_events_contract.dart';
+import 'package:hako/src/contracts/hako_events_contract.dart';
 
 /// A mixin that provides event streaming capabilities for Hako events.
 ///

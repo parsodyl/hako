@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:hako/src/hako_event_stream_mixin.dart';
-import 'package:hako/src/hako_modifiers_contract.dart';
-import 'package:hako/src/hako_state_events.dart';
-import 'package:hako/src/hako_state_key.dart';
+import 'package:hako/src/event_stream/hako_event_stream_mixin.dart';
+import 'package:hako/src/contracts/hako_modifiers_contract.dart';
+import 'package:hako/src/event_stream/hako_state_events.dart';
+import 'package:hako/src/foundation/hako_state_key.dart';
 import 'package:hako/src/hako.dart';
 import 'package:provider/provider.dart';
 

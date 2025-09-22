@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hako/src/hako_state_events.dart';
+import 'package:hako/src/event_stream/hako_state_events.dart';
 
 void main() {
   group(
@@ -10,7 +10,7 @@ void main() {
         () {
           // Arrange & Act
           const state = null;
-          final event = _TestHakoStateEvent(state) as HakoStateEvent;
+          const event = _TestHakoStateEvent(state);
 
           // Assert
           expect(event.state, isNull);
@@ -23,8 +23,7 @@ void main() {
         () {
           // Arrange & Act
           const state = null;
-          final event = _TestHakoStateEvent<Set<String>?>(state)
-              as HakoStateEvent<Set<String>?>;
+          const event = _TestHakoStateEvent<Set<String>?>(state);
           Type type<T>() => T; // this is needed to get the nullable type
 
           // Assert
@@ -38,8 +37,7 @@ void main() {
         () {
           // Arrange & Act
           const state = {'test_value'};
-          final event = _TestHakoStateEvent<Set<String>>(state)
-              as HakoStateEvent<Set<String>>;
+          const event = _TestHakoStateEvent<Set<String>>(state);
 
           // Assert
           expect(event.state, equals(state));
@@ -53,8 +51,7 @@ void main() {
           // Arrange & Act
           const state = {'test_value'};
           const name = 'test_name';
-          final event = _TestHakoStateEvent<Set<String>>(state, name: name)
-              as HakoStateEvent<Set<String>>;
+          const event = _TestHakoStateEvent<Set<String>>(state, name: name);
 
           // Assert
           expect(event.state, equals(state));
@@ -73,7 +70,7 @@ void main() {
           // Arrange & Act
           const state = {'test_value'};
           const name = 'test_name';
-          final event = ValueGetEvent<Set<String>?>(state, name: name);
+          const event = ValueGetEvent<Set<String>?>(state, name: name);
 
           // Assert
           expect(event, isA<HakoStateEvent<Set<String>?>>());
@@ -107,8 +104,8 @@ void main() {
           // Arrange
           const state = {'test_value'};
           const name = 'test_name';
-          final event1 = ValueGetEvent<Set<String>>(state, name: name);
-          final event2 = ValueGetEvent<Set<String>>(state, name: name);
+          const event1 = ValueGetEvent<Set<String>>(state, name: name);
+          const event2 = ValueGetEvent<Set<String>>(state, name: name);
 
           // Act & Assert
           expect(event1, equals(event2));
@@ -122,8 +119,8 @@ void main() {
           const state1 = 'first_value';
           const state2 = 'second_value';
           const name = 'test_name';
-          final event1 = ValueGetEvent<String>(state1, name: name);
-          final event2 = ValueGetEvent<String>(state2, name: name);
+          const event1 = ValueGetEvent<String>(state1, name: name);
+          const event2 = ValueGetEvent<String>(state2, name: name);
 
           // Act & Assert
           expect(event1 == event2, isFalse);
@@ -136,8 +133,8 @@ void main() {
           // Arrange
           const state = 0;
           const name = 'test_name';
-          final event1 = ValueGetEvent<num>(state, name: name);
-          final event2 = ValueGetEvent<int>(state, name: name);
+          const event1 = ValueGetEvent<num>(state, name: name);
+          const event2 = ValueGetEvent<int>(state, name: name);
 
           // Act & Assert
           expect(event1, isNot(equals(event2)));
@@ -149,8 +146,8 @@ void main() {
         () {
           // Arrange
           const state = 'test_value';
-          final event1 = ValueGetEvent<String>(state, name: 'first');
-          final event2 = ValueGetEvent<String>(state, name: 'second');
+          const event1 = ValueGetEvent<String>(state, name: 'first');
+          const event2 = ValueGetEvent<String>(state, name: 'second');
 
           // Act & Assert
           expect(event1, isNot(equals(event2)));
@@ -169,7 +166,7 @@ void main() {
           const previous = {'old_value'};
           const state = {'new_value'};
           const name = 'test_name';
-          final event =
+          const event =
               ValueSetEvent<Set<String>?>(previous, state, name: name);
 
           // Assert
@@ -208,9 +205,9 @@ void main() {
           const previous = {'old_value'};
           const state = {'new_value'};
           const name = 'test_name';
-          final event1 =
+          const event1 =
               ValueSetEvent<Set<String>>(previous, state, name: name);
-          final event2 =
+          const event2 =
               ValueSetEvent<Set<String>>(previous, state, name: name);
 
           // Act & Assert
@@ -226,8 +223,8 @@ void main() {
           const previous2 = 'old_value2';
           const state = 'new_value';
           const name = 'test_name';
-          final event1 = ValueSetEvent<String>(previous1, state, name: name);
-          final event2 = ValueSetEvent<String>(previous2, state, name: name);
+          const event1 = ValueSetEvent<String>(previous1, state, name: name);
+          const event2 = ValueSetEvent<String>(previous2, state, name: name);
 
           // Act & Assert
           expect(event1 == event2, isFalse);
@@ -242,8 +239,8 @@ void main() {
           const state1 = 'new_value1';
           const state2 = 'new_value2';
           const name = 'test_name';
-          final event1 = ValueSetEvent<String>(previous, state1, name: name);
-          final event2 = ValueSetEvent<String>(previous, state2, name: name);
+          const event1 = ValueSetEvent<String>(previous, state1, name: name);
+          const event2 = ValueSetEvent<String>(previous, state2, name: name);
 
           // Act & Assert
           expect(event1 == event2, isFalse);
@@ -257,8 +254,8 @@ void main() {
           const previous = 0;
           const state = 1;
           const name = 'test_name';
-          final event1 = ValueSetEvent<num>(previous, state, name: name);
-          final event2 = ValueSetEvent<int>(previous, state, name: name);
+          const event1 = ValueSetEvent<num>(previous, state, name: name);
+          const event2 = ValueSetEvent<int>(previous, state, name: name);
 
           // Act & Assert
           expect(event1, isNot(equals(event2)));
@@ -271,8 +268,8 @@ void main() {
           // Arrange
           const previous = 'old_value';
           const state = 'new_value';
-          final event1 = ValueSetEvent<String>(previous, state, name: 'first');
-          final event2 = ValueSetEvent<String>(previous, state, name: 'second');
+          const event1 = ValueSetEvent<String>(previous, state, name: 'first');
+          const event2 = ValueSetEvent<String>(previous, state, name: 'second');
 
           // Act & Assert
           expect(event1, isNot(equals(event2)));

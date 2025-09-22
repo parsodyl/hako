@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hako/src/base_hako.dart';
-import 'package:hako/src/hako_modifiers_contract.dart';
-import 'package:hako/src/hako_state_events.dart';
+import 'package:hako/src/contracts/hako_modifiers_contract.dart';
+import 'package:hako/src/event_stream/hako_state_events.dart';
 
 void main() {
   group(
@@ -818,8 +818,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueGetEvent<String>('test value'),
-              ValueGetEvent<int>(42, name: 'counter'),
+              const ValueGetEvent<String>('test value'),
+              const ValueGetEvent<int>(42, name: 'counter'),
               emitsDone,
             ]),
           );
@@ -860,8 +860,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueGetEvent<String?>(null),
-              ValueGetEvent<int?>(100, name: 'optional'),
+              const ValueGetEvent<String?>(null),
+              const ValueGetEvent<int?>(100, name: 'optional'),
               emitsDone,
             ]),
           );
@@ -912,9 +912,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueGetEvent<String>('repeated'),
-              ValueGetEvent<String>('repeated'),
-              ValueGetEvent<String>('repeated'),
+              const ValueGetEvent<String>('repeated'),
+              const ValueGetEvent<String>('repeated'),
+              const ValueGetEvent<String>('repeated'),
               emitsDone,
             ]),
           );
@@ -941,9 +941,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueGetEvent<int>(1),
-              ValueGetEvent<String>('hello'),
-              ValueGetEvent<bool>(true, name: 'flag'),
+              const ValueGetEvent<int>(1),
+              const ValueGetEvent<String>('hello'),
+              const ValueGetEvent<bool>(true, name: 'flag'),
               emitsDone,
             ]),
           );
@@ -991,8 +991,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueGetEvent<String>('visible'),
-              ValueGetEvent<String>('visible'),
+              const ValueGetEvent<String>('visible'),
+              const ValueGetEvent<String>('visible'),
               emitsDone,
             ]),
           );
@@ -1046,7 +1046,7 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueGetEvent<int>(42),
+              const ValueGetEvent<int>(42),
               emitsDone,
             ]),
           );
@@ -1076,8 +1076,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueSetEvent<String>('initial', 'updated'),
-              ValueSetEvent<int>(10, 15, name: 'counter'),
+              const ValueSetEvent<String>('initial', 'updated'),
+              const ValueSetEvent<int>(10, 15, name: 'counter'),
               emitsDone,
             ]),
           );
@@ -1118,8 +1118,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueSetEvent<String?>(null, 'not null'),
-              ValueSetEvent<int?>(100, null, name: 'optional'),
+              const ValueSetEvent<String?>(null, 'not null'),
+              const ValueSetEvent<int?>(100, null, name: 'optional'),
               emitsDone,
             ]),
           );
@@ -1173,9 +1173,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueSetEvent<int>(0, 1),
-              ValueSetEvent<int>(1, 2),
-              ValueSetEvent<int>(2, 3),
+              const ValueSetEvent<int>(0, 1),
+              const ValueSetEvent<int>(1, 2),
+              const ValueSetEvent<int>(2, 3),
               emitsDone,
             ]),
           );
@@ -1202,9 +1202,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueSetEvent<int>(1, 2),
-              ValueSetEvent<String>('hello', 'hello world'),
-              ValueSetEvent<bool>(false, true, name: 'flag'),
+              const ValueSetEvent<int>(1, 2),
+              const ValueSetEvent<String>('hello', 'hello world'),
+              const ValueSetEvent<bool>(false, true, name: 'flag'),
               emitsDone,
             ]),
           );
@@ -1253,8 +1253,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueSetEvent<String>('visible', 'updated1'),
-              ValueSetEvent<String>('updated1', 'updated2'),
+              const ValueSetEvent<String>('visible', 'updated1'),
+              const ValueSetEvent<String>('updated1', 'updated2'),
               emitsDone,
             ]),
           );
@@ -1366,7 +1366,7 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueSetEvent<int>(42, 43),
+              const ValueSetEvent<int>(42, 43),
               emitsDone,
             ]),
           );

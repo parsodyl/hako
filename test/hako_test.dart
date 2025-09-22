@@ -1,21 +1,20 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hako/src/hako.dart';
-import 'package:hako/src/hako_events_contract.dart';
-import 'package:hako/src/hako_state_events.dart';
+import 'package:hako/hako.dart';
 
 void main() {
-  test('something1', () {
+  test('text example using event stream', () {
     final hako = CounterHako();
     final stream = hako.openEventStream();
-    stream.forEach(print);
-    hako.count;
+    expect(hako.count, isZero);
     hako.increment();
+    expect(hako.count, equals(1));
     hako.closeEventStream();
     expect(
       stream,
       emitsInOrder([
-        ValueGetEvent<int>(0),
-        ValueSetEvent<int>(0, 1),
+        const ValueGetEvent<int>(0),
+        const ValueSetEvent<int>(0, 1),
+        const ValueGetEvent<int>(1),
         emitsDone,
       ]),
     );

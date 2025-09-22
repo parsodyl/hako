@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hako/src/hako_modifiers_contract.dart';
+import 'package:hako/src/contracts/hako_modifiers_contract.dart';
 
 void main() {
   group(

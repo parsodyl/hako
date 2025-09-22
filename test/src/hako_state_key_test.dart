@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:hako/src/hako_state_key.dart';
+import 'package:hako/src/foundation/hako_state_key.dart';
 
 void main() {
   group(
