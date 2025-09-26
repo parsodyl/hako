@@ -1,5 +1,4 @@
-import 'package:hako/src/contracts/hako_events_contract.dart';
-import 'package:hako/src/foundation/hako_state_key.dart';
+import 'package:hako/src/foundation/foundation.dart';
 
 /// Base class for events that involve state values in a Hako state container.
 abstract class HakoStateEvent<T> extends HakoEvent {

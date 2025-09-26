@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 /// a Hako state container. It provides type-safe access to registered state
 /// values through the [get] method.
 abstract interface class HakoStateGetter {
-
   /// {@template hako_state_get}
   /// Retrieves a state value of type [T] from the container.
   ///

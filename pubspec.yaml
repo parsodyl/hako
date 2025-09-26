@@ -1,5 +1,5 @@
 name: hako
-description: "Hako state management for Flutter"
+description: "A state management library for Flutter designed for simplicity, performance, and testability."
 version: 0.0.1
 repository: https://github.com/parsodyl/hako
 issue_tracker: https://github.com/parsodyl/hako/issues

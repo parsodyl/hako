@@ -1214,8 +1214,7 @@ void main() {
                 ),
                 floatingActionButton: Builder(
                   builder: (context) => FloatingActionButton(
-                    onPressed: () =>
-                        context.getHako<_TestComplexHako>(),
+                    onPressed: () => context.getHako<_TestComplexHako>(),
                     child: const Icon(Icons.add),
                   ),
                 ),
@@ -1378,7 +1377,8 @@ void main() {
 
         // Assert: Filter should return same result
         expect(find.text('Is Even: true'), findsOneWidget);
-        expect(filterResults, equals([true, true])); // No new filter result added
+        expect(
+            filterResults, equals([true, true])); // No new filter result added
 
         // Act: Increment counter
         await tester.tap(find.byIcon(Icons.add));

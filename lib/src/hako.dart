@@ -1,6 +1,6 @@
 import 'package:hako/src/base_hako.dart';
 
-/// A container for multiple states.
+/// A container for multiple state objects.
 ///
 /// [Hako] is the main class that users should extend to create their own state
 /// containers. It provides methods to get and set state values in a type-safe

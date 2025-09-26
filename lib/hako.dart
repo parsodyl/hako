@@ -1,3 +1,4 @@
+/// Hako state management for Flutter.
 library;
 
 export 'src/foundation/foundation.dart';
