@@ -1,15 +1,11 @@
-<p align="center">
-  <img src="https://i.imgur.com/gY9k3tT.png" alt="Hako Logo" width="200"/>
-</p>
-
 <h1 align="center">Hako 📦</h1>
 
 <p align="center">
   A state management library for Flutter designed for simplicity, performance, and testability.
   <br /><br />
   <a href="https://pub.dev/packages/hako"><img src="https://img.shields.io/pub/v/hako?style=for-the-badge" /></a>
-  <a href="#"><img src="https://img.shields.io/github/workflow/status/[YOUR_GITHUB_USERNAME]/hako/main?style=for-the-badge" /></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/github/license/[YOUR_GITHUB_USERNAME]/hako?style=for-the-badge" /></a>
+  <a href="#"><img src="https://img.shields.io/github/workflow/status/parsodyl/hako/main?style=for-the-badge" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/github/license/parsodyl/hako?style=for-the-badge" /></a>
 </p>
 
 ---
@@ -135,3 +131,6 @@ myHako.increment(); // This will trigger the listener and print the state change
 // (c) close the event stream (and prevent possible memory leaks).
 myHako.closeEventStream();
 ```
+
+# Contribute
+If you find a bug, or you would like to see a new feature, please create an issue.
