@@ -29,6 +29,25 @@ part of 'base_hako.dart';
 ///   child: MyApp(),
 /// )
 /// ```
+///
+/// ## Lazy Initialization
+/// Control when Hako instances are created using the `lazy` parameter:
+///
+/// ```dart
+/// // Lazy initialization (default) - created only when first accessed
+/// HakoProvider<CounterHako>(
+///   lazy: true, // or omit since it's the default
+///   create: (context) => CounterHako(),
+///   child: MyApp(),
+/// )
+///
+/// // Eager initialization - created immediately when provider is built
+/// HakoProvider<CounterHako>(
+///   lazy: false,
+///   create: (context) => CounterHako(),
+///   child: MyApp(),
+/// )
+/// ```
 class HakoProvider<H extends BaseHako>
     extends ChangeNotifierProvider<_HakoNotifier<H>> {
   /// Creates a new [HakoProvider] that creates and provides a Hako instance
@@ -81,8 +100,85 @@ class HakoProvider<H extends BaseHako>
 /// Extension methods on [BuildContext] for accessing and watching Hako state
 /// containers.
 ///
-/// This extension provides the methods to interact with Hako instances
-/// provided through [HakoProvider] in the widget tree.
+/// This extension provides the primary interface for interacting with Hako
+/// instances and their state values from within Flutter widgets. It offers
+/// three main capabilities:
+///
+/// 1. **Direct Access**: Get a Hako instance to call methods without listening
+///    for changes using [getHako].
+/// 2. **Reactive Watching**: Subscribe to state changes and automatically
+///    rebuild widgets when state values change using [watchHakoState].
+/// 3. **Filtered Watching**: Subscribe to derived/transformed state values
+///    with granular rebuild control using [filterHakoState].
+///
+/// ## Usage Patterns
+///
+/// ### Getting Hako Instances
+/// Use [getHako] when you need to call methods on a Hako instance or access
+/// properties without triggering widget rebuilds:
+///
+/// ```dart
+/// // In a button's onPressed callback
+/// onPressed: () {
+///   final counterHako = context.getHako<CounterHako>();
+///   counterHako.increment(); // Calls method without rebuilding this widget
+/// }
+/// ```
+///
+/// ### Watching State Changes
+/// Use [watchHakoState] to create reactive widgets that rebuild when specific
+/// state values change:
+///
+/// ```dart
+/// Widget build(BuildContext context) {
+///   // Widget rebuilds whenever the counter value changes
+///   final count = context.watchHakoState<CounterHako, int>();
+///   return Text('Count: $count');
+/// }
+/// ```
+///
+/// For named state values:
+/// ```dart
+/// Widget build(BuildContext context) {
+///   final theme = context.watchHakoState<SettingsHako, String>(name: 'theme');
+///   final volume = context.watchHakoState<SettingsHako, int>(name: 'volume');
+///   return Column(
+///     children: [
+///       Text('Theme: $theme'),
+///       Text('Volume: $volume'),
+///     ],
+///   );
+/// }
+/// ```
+///
+/// ### Filtered State Watching
+/// Use [filterHakoState] when you want to derive values from state and only
+/// rebuild when the derived value changes:
+///
+/// ```dart
+/// Widget build(BuildContext context) {
+///   // Only rebuilds when the "even/odd" status changes, not on every count change
+///   final isEven = context.filterHakoState<CounterHako, int, bool>(
+///     filter: (count) => count % 2 == 0,
+///   );
+///   return Text('Count is ${isEven ? 'even' : 'odd'}');
+/// }
+/// ```
+///
+/// ## Performance Considerations
+///
+/// - [getHako] does not create subscriptions and won't trigger rebuilds
+/// - [watchHakoState] uses hash-based comparison and may rebuild on reference
+///   changes even with identical content
+/// - [filterHakoState] uses content-based comparison and provides more
+///   granular rebuild control for derived values
+///
+/// ## Error Handling
+///
+/// All methods throw [HakoProviderNotFoundException] if no matching
+/// [HakoProvider] is found in the widget tree. [watchHakoState] and
+/// [filterHakoState] additionally throw [ArgumentError] if the requested
+/// state type and name combination hasn't been registered in the Hako instance.
 extension HakoBuildContextExtension on BuildContext {
   /// Retrieves a Hako instance of type [H] from the widget tree.
   ///

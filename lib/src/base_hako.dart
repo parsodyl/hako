@@ -60,6 +60,21 @@ typedef RegisterCallback = void Function<T>(T value, {String? name});
 /// construction, and subsequent access must use the same types.
 /// Nullable types must be explicitly declared (e.g., `register<String?>(null)`
 /// instead of `register(null)`).
+/// 
+/// ## Optional names
+///
+/// State values can be registered with optional string names to allow
+/// multiple instances of the same type within a single Hako container.
+/// This is useful when you need to store several values of the same type
+/// that serve different purposes.
+///
+/// The combination of type and name creates a unique key that identifies
+/// each piece of state within the container. This key is used consistently
+/// across all operations - you must use the same type and name combination
+/// when registering, accessing, and modifying a specific state value.
+///
+/// Unnamed state (where name is `null`) and named state of the same type
+/// are treated as completely separate and independent state values.
 ///
 /// ## Error handling
 ///
