@@ -132,5 +132,13 @@ myHako.increment(); // This will trigger the listener and print the state change
 myHako.closeEventStream();
 ```
 
+## Documentation
+
+For detailed API documentation and examples, visit:
+
+- [Hako Class](https://pub.dev/documentation/hako/latest/hako/Hako-class.html) - Core container class for state management
+- [HakoProvider Class](https://pub.dev/documentation/hako/latest/hako/HakoProvider-class.html) - Widget for providing Hako instances to the widget tree
+- [HakoBuildContextExtension](https://pub.dev/documentation/hako/latest/hako/HakoBuildContextExtension.html) - Extension methods for accessing Hako state in widgets
+
 # Contribute
 If you find a bug, or you would like to see a new feature, please create an issue.
