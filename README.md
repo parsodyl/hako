@@ -4,8 +4,8 @@
   A state management library for Flutter designed for simplicity, performance, and testability.
   <br /><br />
   <a href="https://pub.dev/packages/hako"><img src="https://img.shields.io/pub/v/hako?style=for-the-badge" /></a>
-  <a href="#"><img src="https://img.shields.io/github/workflow/status/parsodyl/hako/dart.yml?style=for-the-badge" /></a>
-  <a href="./LICENSE"><img src="https://img.shields.io/github/license/parsodyl/hako?style=for-the-badge" /></a>
+  <a href="https://github.com/parsodyl/hako/actions/workflows/dart.yml"><img src="https://img.shields.io/github/actions/workflow/status/parsodyl/hako/dart.yml?style=for-the-badge" /></a>
+  <a href="https://github.com/parsodyl/hako/blob/main/LICENSE"><img src="https://img.shields.io/github/license/parsodyl/hako?style=for-the-badge" /></a>
 </p>
 
 ---
