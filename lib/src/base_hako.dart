@@ -60,7 +60,7 @@ typedef RegisterCallback = void Function<T>(T value, {String? name});
 /// construction, and subsequent access must use the same types.
 /// Nullable types must be explicitly declared (e.g., `register<String?>(null)`
 /// instead of `register(null)`).
-/// 
+///
 /// ## Optional names
 ///
 /// State values can be registered with optional string names to allow
