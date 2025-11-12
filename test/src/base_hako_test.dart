@@ -800,7 +800,7 @@ void main() {
     'BaseHako get method event stream behavior',
     () {
       test(
-        'should emit ValueGetEvent when getting state with event stream open',
+        'should emit GetEvent when getting state with event stream open',
         () {
           // Arrange
           final hako = _TestBaseHako((register) {
@@ -818,8 +818,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueGetEvent<String>('test value'),
-              const ValueGetEvent<int>(42, name: 'counter'),
+              const GetEvent<String>('test value'),
+              const GetEvent<int>(42, name: 'counter'),
               emitsDone,
             ]),
           );
@@ -842,7 +842,7 @@ void main() {
         },
       );
       test(
-        'should emit correct ValueGetEvent with nullable types',
+        'should emit correct GetEvent with nullable types',
         () {
           // Arrange
           final hako = _TestBaseHako((register) {
@@ -860,8 +860,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueGetEvent<String?>(null),
-              const ValueGetEvent<int?>(100, name: 'optional'),
+              const GetEvent<String?>(null),
+              const GetEvent<int?>(100, name: 'optional'),
               emitsDone,
             ]),
           );
@@ -887,7 +887,7 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueGetEvent<Map<String, List<int>>>(mapValue),
+              GetEvent<Map<String, List<int>>>(mapValue),
               emitsDone,
             ]),
           );
@@ -912,9 +912,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueGetEvent<String>('repeated'),
-              const ValueGetEvent<String>('repeated'),
-              const ValueGetEvent<String>('repeated'),
+              const GetEvent<String>('repeated'),
+              const GetEvent<String>('repeated'),
+              const GetEvent<String>('repeated'),
               emitsDone,
             ]),
           );
@@ -941,9 +941,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueGetEvent<int>(1),
-              const ValueGetEvent<String>('hello'),
-              const ValueGetEvent<bool>(true, name: 'flag'),
+              const GetEvent<int>(1),
+              const GetEvent<String>('hello'),
+              const GetEvent<bool>(true, name: 'flag'),
               emitsDone,
             ]),
           );
@@ -991,8 +991,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueGetEvent<String>('visible'),
-              const ValueGetEvent<String>('visible'),
+              const GetEvent<String>('visible'),
+              const GetEvent<String>('visible'),
               emitsDone,
             ]),
           );
@@ -1017,9 +1017,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              predicate<ValueGetEvent<String>>((event) =>
+              predicate<GetEvent<String>>((event) =>
                   event.key == (String, null) && event.state == 'unnamed'),
-              predicate<ValueGetEvent<String>>((event) =>
+              predicate<GetEvent<String>>((event) =>
                   event.key == (String, 'special') && event.state == 'named'),
               emitsDone,
             ]),
@@ -1046,7 +1046,7 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueGetEvent<int>(42),
+              const GetEvent<int>(42),
               emitsDone,
             ]),
           );
@@ -1058,7 +1058,7 @@ void main() {
     'BaseHako set method event stream behavior',
     () {
       test(
-        'should emit ValueSetEvent when setting state with event stream open',
+        'should emit SetEvent when setting state with event stream open',
         () {
           // Arrange
           final hako = _TestBaseHako((register) {
@@ -1076,8 +1076,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueSetEvent<String>('initial', 'updated'),
-              const ValueSetEvent<int>(10, 15, name: 'counter'),
+              const SetEvent<String>('initial', 'updated'),
+              const SetEvent<int>(10, 15, name: 'counter'),
               emitsDone,
             ]),
           );
@@ -1100,7 +1100,7 @@ void main() {
         },
       );
       test(
-        'should emit correct ValueSetEvent with nullable types',
+        'should emit correct SetEvent with nullable types',
         () {
           // Arrange
           final hako = _TestBaseHako((register) {
@@ -1118,8 +1118,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueSetEvent<String?>(null, 'not null'),
-              const ValueSetEvent<int?>(100, null, name: 'optional'),
+              const SetEvent<String?>(null, 'not null'),
+              const SetEvent<int?>(100, null, name: 'optional'),
               emitsDone,
             ]),
           );
@@ -1148,7 +1148,7 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              ValueSetEvent<Map<String, List<int>>>(initialMap, updatedMap),
+              SetEvent<Map<String, List<int>>>(initialMap, updatedMap),
               emitsDone,
             ]),
           );
@@ -1173,9 +1173,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueSetEvent<int>(0, 1),
-              const ValueSetEvent<int>(1, 2),
-              const ValueSetEvent<int>(2, 3),
+              const SetEvent<int>(0, 1),
+              const SetEvent<int>(1, 2),
+              const SetEvent<int>(2, 3),
               emitsDone,
             ]),
           );
@@ -1202,9 +1202,9 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueSetEvent<int>(1, 2),
-              const ValueSetEvent<String>('hello', 'hello world'),
-              const ValueSetEvent<bool>(false, true, name: 'flag'),
+              const SetEvent<int>(1, 2),
+              const SetEvent<String>('hello', 'hello world'),
+              const SetEvent<bool>(false, true, name: 'flag'),
               emitsDone,
             ]),
           );
@@ -1253,8 +1253,8 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueSetEvent<String>('visible', 'updated1'),
-              const ValueSetEvent<String>('updated1', 'updated2'),
+              const SetEvent<String>('visible', 'updated1'),
+              const SetEvent<String>('updated1', 'updated2'),
               emitsDone,
             ]),
           );
@@ -1301,11 +1301,11 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              predicate<ValueSetEvent<List<String>>>((event) =>
+              predicate<SetEvent<List<String>>>((event) =>
                   listEquals<String>(event.previous, ['a', 'b']) &&
                   listEquals<String>(event.state, ['a', 'b']) &&
                   !identical(event.previous, event.state)),
-              predicate<ValueSetEvent<Map<String, int>>>((event) =>
+              predicate<SetEvent<Map<String, int>>>((event) =>
                   mapEquals<String, int>(event.previous, {'key': 1}) &&
                   mapEquals<String, int>(event.state, {'key': 1}) &&
                   !identical(event.previous, event.state)),
@@ -1333,11 +1333,11 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              predicate<ValueSetEvent<String>>((event) =>
+              predicate<SetEvent<String>>((event) =>
                   event.key == (String, null) &&
                   event.previous == 'unnamed' &&
                   event.state == 'updated unnamed'),
-              predicate<ValueSetEvent<String>>((event) =>
+              predicate<SetEvent<String>>((event) =>
                   event.key == (String, 'special') &&
                   event.previous == 'named' &&
                   event.state == 'updated named'),
@@ -1366,7 +1366,7 @@ void main() {
           expect(
             stream,
             emitsInOrder([
-              const ValueSetEvent<int>(42, 43),
+              const SetEvent<int>(42, 43),
               emitsDone,
             ]),
           );

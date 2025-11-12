@@ -62,7 +62,7 @@ void main() {
     },
   );
   group(
-    'ValueGetEvent',
+    'GetEvent',
     () {
       test(
         'should be a HakoStateEvent',
@@ -70,21 +70,21 @@ void main() {
           // Arrange & Act
           const state = {'test_value'};
           const name = 'test_name';
-          const event = ValueGetEvent<Set<String>?>(state, name: name);
+          const event = GetEvent<Set<String>?>(state, name: name);
 
           // Assert
           expect(event, isA<HakoStateEvent<Set<String>?>>());
         },
       );
       test(
-        'should create ValueGetEvent with complex object state and verify toString format',
+        'should create GetEvent with complex object state and verify toString format',
         () {
           // Arrange
           final state = {'key1': 'value1', 'key2': 'value2'};
           const name = 'complex_state';
 
           // Act
-          final event = ValueGetEvent<Map<String, String>>(state, name: name);
+          final event = GetEvent<Map<String, String>>(state, name: name);
 
           // Assert
           expect(event.state, equals(state));
@@ -93,19 +93,19 @@ void main() {
           expect(
             event.toString(),
             equals(
-              'ValueGetEvent{key: (Map<String, String>, complex_state), state: {key1: value1, key2: value2}}',
+              'GetEvent{key: (Map<String, String>, complex_state), state: {key1: value1, key2: value2}}',
             ),
           );
         },
       );
       test(
-        'should verify two ValueGetEvent instances with same state and key are equal',
+        'should verify two GetEvent instances with same state and key are equal',
         () {
           // Arrange
           const state = {'test_value'};
           const name = 'test_name';
-          const event1 = ValueGetEvent<Set<String>>(state, name: name);
-          const event2 = ValueGetEvent<Set<String>>(state, name: name);
+          const event1 = GetEvent<Set<String>>(state, name: name);
+          const event2 = GetEvent<Set<String>>(state, name: name);
 
           // Act & Assert
           expect(event1, equals(event2));
@@ -113,14 +113,14 @@ void main() {
         },
       );
       test(
-        'should verify two ValueGetEvent instances with different states are not equal',
+        'should verify two GetEvent instances with different states are not equal',
         () {
           // Arrange
           const state1 = 'first_value';
           const state2 = 'second_value';
           const name = 'test_name';
-          const event1 = ValueGetEvent<String>(state1, name: name);
-          const event2 = ValueGetEvent<String>(state2, name: name);
+          const event1 = GetEvent<String>(state1, name: name);
+          const event2 = GetEvent<String>(state2, name: name);
 
           // Act & Assert
           expect(event1 == event2, isFalse);
@@ -128,13 +128,13 @@ void main() {
         },
       );
       test(
-        'should verify two ValueGetEvent instances with same state, same name and different types are not equal',
+        'should verify two GetEvent instances with same state, same name and different types are not equal',
         () {
           // Arrange
           const state = 0;
           const name = 'test_name';
-          const event1 = ValueGetEvent<num>(state, name: name);
-          const event2 = ValueGetEvent<int>(state, name: name);
+          const event1 = GetEvent<num>(state, name: name);
+          const event2 = GetEvent<int>(state, name: name);
 
           // Act & Assert
           expect(event1, isNot(equals(event2)));
@@ -142,12 +142,12 @@ void main() {
         },
       );
       test(
-        'should verify two ValueGetEvent instances with same state, same type and different names are not equal',
+        'should verify two GetEvent instances with same state, same type and different names are not equal',
         () {
           // Arrange
           const state = 'test_value';
-          const event1 = ValueGetEvent<String>(state, name: 'first');
-          const event2 = ValueGetEvent<String>(state, name: 'second');
+          const event1 = GetEvent<String>(state, name: 'first');
+          const event2 = GetEvent<String>(state, name: 'second');
 
           // Act & Assert
           expect(event1, isNot(equals(event2)));
@@ -157,7 +157,7 @@ void main() {
     },
   );
   group(
-    'ValueSetEvent',
+    'SetEvent',
     () {
       test(
         'should be a HakoStateEvent',
@@ -166,15 +166,14 @@ void main() {
           const previous = {'old_value'};
           const state = {'new_value'};
           const name = 'test_name';
-          const event =
-              ValueSetEvent<Set<String>?>(previous, state, name: name);
+          const event = SetEvent<Set<String>?>(previous, state, name: name);
 
           // Assert
           expect(event, isA<HakoStateEvent<Set<String>?>>());
         },
       );
       test(
-        'should create ValueSetEvent with complex object state and verify toString format',
+        'should create SetEvent with complex object state and verify toString format',
         () {
           // Arrange
           final previous = {'key1': 'old_value1', 'key2': 'old_value2'};
@@ -183,7 +182,7 @@ void main() {
 
           // Act
           final event =
-              ValueSetEvent<Map<String, String>>(previous, state, name: name);
+              SetEvent<Map<String, String>>(previous, state, name: name);
 
           // Assert
           expect(event.previous, equals(previous));
@@ -193,22 +192,20 @@ void main() {
           expect(
             event.toString(),
             equals(
-              'ValueSetEvent{key: (Map<String, String>, complex_state), previous: {key1: old_value1, key2: old_value2}, state: {key1: new_value1, key2: new_value2}}',
+              'SetEvent{key: (Map<String, String>, complex_state), previous: {key1: old_value1, key2: old_value2}, state: {key1: new_value1, key2: new_value2}}',
             ),
           );
         },
       );
       test(
-        'should verify two ValueSetEvent instances with same previous, state and key are equal',
+        'should verify two SetEvent instances with same previous, state and key are equal',
         () {
           // Arrange
           const previous = {'old_value'};
           const state = {'new_value'};
           const name = 'test_name';
-          const event1 =
-              ValueSetEvent<Set<String>>(previous, state, name: name);
-          const event2 =
-              ValueSetEvent<Set<String>>(previous, state, name: name);
+          const event1 = SetEvent<Set<String>>(previous, state, name: name);
+          const event2 = SetEvent<Set<String>>(previous, state, name: name);
 
           // Act & Assert
           expect(event1, equals(event2));
@@ -216,15 +213,15 @@ void main() {
         },
       );
       test(
-        'should verify two ValueSetEvent instances with different previous values are not equal',
+        'should verify two SetEvent instances with different previous values are not equal',
         () {
           // Arrange
           const previous1 = 'old_value1';
           const previous2 = 'old_value2';
           const state = 'new_value';
           const name = 'test_name';
-          const event1 = ValueSetEvent<String>(previous1, state, name: name);
-          const event2 = ValueSetEvent<String>(previous2, state, name: name);
+          const event1 = SetEvent<String>(previous1, state, name: name);
+          const event2 = SetEvent<String>(previous2, state, name: name);
 
           // Act & Assert
           expect(event1 == event2, isFalse);
@@ -232,15 +229,15 @@ void main() {
         },
       );
       test(
-        'should verify two ValueSetEvent instances with different states are not equal',
+        'should verify two SetEvent instances with different states are not equal',
         () {
           // Arrange
           const previous = 'old_value';
           const state1 = 'new_value1';
           const state2 = 'new_value2';
           const name = 'test_name';
-          const event1 = ValueSetEvent<String>(previous, state1, name: name);
-          const event2 = ValueSetEvent<String>(previous, state2, name: name);
+          const event1 = SetEvent<String>(previous, state1, name: name);
+          const event2 = SetEvent<String>(previous, state2, name: name);
 
           // Act & Assert
           expect(event1 == event2, isFalse);
@@ -248,14 +245,14 @@ void main() {
         },
       );
       test(
-        'should verify two ValueSetEvent instances with same previous, same state, same name and different types are not equal',
+        'should verify two SetEvent instances with same previous, same state, same name and different types are not equal',
         () {
           // Arrange
           const previous = 0;
           const state = 1;
           const name = 'test_name';
-          const event1 = ValueSetEvent<num>(previous, state, name: name);
-          const event2 = ValueSetEvent<int>(previous, state, name: name);
+          const event1 = SetEvent<num>(previous, state, name: name);
+          const event2 = SetEvent<int>(previous, state, name: name);
 
           // Act & Assert
           expect(event1, isNot(equals(event2)));
@@ -263,13 +260,13 @@ void main() {
         },
       );
       test(
-        'should verify two ValueSetEvent instances with same previous, same state, same type and different names are not equal',
+        'should verify two SetEvent instances with same previous, same state, same type and different names are not equal',
         () {
           // Arrange
           const previous = 'old_value';
           const state = 'new_value';
-          const event1 = ValueSetEvent<String>(previous, state, name: 'first');
-          const event2 = ValueSetEvent<String>(previous, state, name: 'second');
+          const event1 = SetEvent<String>(previous, state, name: 'first');
+          const event2 = SetEvent<String>(previous, state, name: 'second');
 
           // Act & Assert
           expect(event1, isNot(equals(event2)));

@@ -44,25 +44,25 @@ abstract class HakoStateEvent<T> extends HakoEvent {
 /// The event is useful for testing, debugging, logging, or implementing
 /// reactive behaviors that need to track when specific state values are being
 /// accessed.
-class ValueGetEvent<T> extends HakoStateEvent<T> {
-  /// Creates a new [ValueGetEvent] with the specified state value and optional
+class GetEvent<T> extends HakoStateEvent<T> {
+  /// Creates a new [GetEvent] with the specified state value and optional
   /// name.
   ///
   /// [T] The type of the state value.
   /// [state] The state value that was retrieved from the Hako container.
   /// [name] An optional identifier for the state value. Used when multiple
   /// state values of the same type need to be distinguished.
-  const ValueGetEvent(super.state, {super.name});
+  const GetEvent(super.state, {super.name});
 
   @override
   String toString() {
-    return 'ValueGetEvent{key: $key, state: $state}';
+    return 'GetEvent{key: $key, state: $state}';
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ValueGetEvent &&
+      other is GetEvent &&
           runtimeType == other.runtimeType &&
           key == other.key &&
           state == other.state;
@@ -81,8 +81,8 @@ class ValueGetEvent<T> extends HakoStateEvent<T> {
 /// The event is useful for testing, debugging, logging, or implementing
 /// reactive behaviors that need to track when specific state values are being
 /// modified and what changes occurred.
-class ValueSetEvent<T> extends HakoStateEvent<T> {
-  /// Creates a new [ValueSetEvent] with the specified previous and new state
+class SetEvent<T> extends HakoStateEvent<T> {
+  /// Creates a new [SetEvent] with the specified previous and new state
   /// values and optional name.
   ///
   /// [T] The type of the state value.
@@ -90,7 +90,7 @@ class ValueSetEvent<T> extends HakoStateEvent<T> {
   /// [state] The new state value that was set in the Hako container.
   /// [name] An optional identifier for the state value. Used when multiple
   /// state values of the same type need to be distinguished.
-  const ValueSetEvent(this.previous, super.state, {super.name});
+  const SetEvent(this.previous, super.state, {super.name});
 
   /// The state value that existed before the update operation.
   ///
@@ -101,13 +101,13 @@ class ValueSetEvent<T> extends HakoStateEvent<T> {
 
   @override
   String toString() {
-    return 'ValueSetEvent{key: $key, previous: $previous, state: $state}';
+    return 'SetEvent{key: $key, previous: $previous, state: $state}';
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ValueSetEvent &&
+      other is SetEvent &&
           runtimeType == other.runtimeType &&
           key == other.key &&
           state == other.state &&

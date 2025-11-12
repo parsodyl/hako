@@ -18,7 +18,7 @@ Hako (箱), the Japanese word for *box*, is a state management library built on 
 * **Minimal & Explicit API**: The public API is focused on three core operations: registering state in the constructor, reading state with `get()`, and updating state with `set()`.
 * **No Code Generation**: The library is built with handwritten Dart and requires no build runners or generated files, keeping the development workflow simple.
 * **Testable by Design**: The core logic (`Hako` containers) is decoupled from the Flutter widget tree, allowing for better separation of concerns and straightforward unit testing.
-* **State Change Observability**: An optional event stream can be opened to monitor all state access (`ValueGetEvent`) and mutation (`ValueSetEvent`) operations for testing, debugging or logging purposes.
+* **State Change Observability**: An optional event stream can be opened to monitor all state access (`GetEvent`) and mutation (`SetEvent`) operations for testing, debugging or logging purposes.
 
 ---
 
@@ -121,7 +121,7 @@ final stream = myHako.openEventStream();
 
 // (b) listen to the stream of events.
 stream.listen((event) {
-  if (event is ValueSetEvent) {
+  if (event is SetEvent) {
     print('State changed: key=${event.key}, previous=${event.previous}, new=${event.state}');
   }
 });

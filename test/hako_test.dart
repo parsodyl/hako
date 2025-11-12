@@ -12,9 +12,9 @@ void main() {
     expect(
       stream,
       emitsInOrder([
-        const ValueGetEvent<int>(0),
-        const ValueSetEvent<int>(0, 1),
-        const ValueGetEvent<int>(1),
+        const GetEvent<int>(0),
+        const SetEvent<int>(0, 1),
+        const GetEvent<int>(1),
         emitsDone,
       ]),
     );

@@ -35,8 +35,8 @@ typedef RegisterCallback = void Function<T>(T value, {String? name});
 /// operations when the event stream is open. This enables testing, monitoring,
 /// debugging, and any other possible reactive behaviors:
 ///
-/// - **[ValueGetEvent]**: Emitted when state is accessed via `get<T>()`
-/// - **[ValueSetEvent]**: Emitted when state is modified via `set<T>()`
+/// - **[GetEvent]**: Emitted when state is accessed via `get<T>()`
+/// - **[SetEvent]**: Emitted when state is modified via `set<T>()`
 ///
 /// Events are only emitted when `isEventStreamOpen` returns `true`. The event
 /// stream can be controlled through the [HakoEventStreamMixin] methods and is
@@ -47,7 +47,7 @@ typedef RegisterCallback = void Function<T>(T value, {String? name});
 /// final hako = MyHako();
 /// final stream = hako.openEventStream();
 /// stream.listen((event) {
-///   if (event is ValueSetEvent<int>) {
+///   if (event is SetEvent<int>) {
 ///     print('Counter changed from ${event.previous} to ${event.state}');
 ///   }
 /// });
@@ -148,7 +148,7 @@ abstract class BaseHako
 
   /// {@macro hako_state_get}
   ///
-  /// [addToEventStream] Whether to emit a [ValueGetEvent] to the event stream
+  /// [addToEventStream] Whether to emit a [GetEvent] to the event stream
   /// when the stream is open. Defaults to `true`. Set to `false` to access
   /// state silently without notifying event stream listeners.
   ///
@@ -167,14 +167,14 @@ abstract class BaseHako
     }
     final state = _stateMap[(T, name)] as T;
     if (addToEventStream) {
-      onEvent(ValueGetEvent<T>(name: name, state));
+      onEvent(GetEvent<T>(name: name, state));
     }
     return state;
   }
 
   /// {@macro hako_state_set}
   ///
-  /// [addToEventStream] Whether to emit a [ValueSetEvent] to the event stream
+  /// [addToEventStream] Whether to emit a [SetEvent] to the event stream
   /// when the stream is open. Defaults to `true`. Set to `false` to update
   /// state silently without notifying event stream listeners.
   ///
@@ -199,7 +199,7 @@ abstract class BaseHako
     if (!identical(previous, state)) {
       _stateMap[(T, name)] = state;
       if (addToEventStream) {
-        onEvent(ValueSetEvent<T>(name: name, previous, state));
+        onEvent(SetEvent<T>(name: name, previous, state));
       }
       _onSetCalled?.call();
     }
