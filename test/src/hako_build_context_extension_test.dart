@@ -4,7 +4,7 @@ import 'package:hako/src/base_hako.dart';
 
 void main() {
   group(
-    'HakoBuildContextExtension - getHako method',
+    'HakoBuildContextExtension - readHako method',
     () {
       // Arrange
       final testChild = Container(key: const Key('test-child'));
@@ -23,7 +23,7 @@ void main() {
                 value: testHako,
                 child: Builder(
                   builder: (context) {
-                    retrievedHako = context.getHako<_TestCounterHako>();
+                    retrievedHako = context.readHako<_TestCounterHako>();
                     return testChild;
                   },
                 ),
@@ -52,8 +52,8 @@ void main() {
                 value: testHako,
                 child: Builder(
                   builder: (context) {
-                    firstCall = context.getHako<_TestCounterHako>();
-                    secondCall = context.getHako<_TestCounterHako>();
+                    firstCall = context.readHako<_TestCounterHako>();
+                    secondCall = context.readHako<_TestCounterHako>();
                     return testChild;
                   },
                 ),
@@ -88,8 +88,8 @@ void main() {
                   child: Builder(
                     builder: (context) {
                       retrievedCounterHako =
-                          context.getHako<_TestCounterHako>();
-                      retrievedStringHako = context.getHako<_TestStringHako>();
+                          context.readHako<_TestCounterHako>();
+                      retrievedStringHako = context.readHako<_TestStringHako>();
                       return testChild;
                     },
                   ),
@@ -116,7 +116,7 @@ void main() {
               home: Builder(
                 builder: (context) {
                   try {
-                    context.getHako<_TestCounterHako>();
+                    context.readHako<_TestCounterHako>();
                   } catch (e) {
                     thrownException = e;
                   }
@@ -153,7 +153,7 @@ void main() {
                 child: Builder(
                   builder: (context) {
                     try {
-                      context.getHako<_TestStringHako>();
+                      context.readHako<_TestStringHako>();
                     } catch (e) {
                       thrownException = e;
                     }
@@ -191,7 +191,7 @@ void main() {
                 child: Builder(
                   builder: (context) {
                     buildCount++;
-                    final hako = context.getHako<_TestCounterHako>();
+                    final hako = context.readHako<_TestCounterHako>();
                     return Text('Count: ${hako.count}');
                   },
                 ),
@@ -206,7 +206,7 @@ void main() {
           testHako.increment();
           await tester.pump();
 
-          // Should not rebuild because getHako doesn't listen to changes
+          // Should not rebuild because readHako doesn't listen to changes
           expect(buildCount, equals(1));
         },
       );
@@ -311,7 +311,7 @@ void main() {
                   floatingActionButton: Builder(
                     builder: (context) => FloatingActionButton(
                       onPressed: () =>
-                          context.getHako<_TestCounterHako>().increment(),
+                          context.readHako<_TestCounterHako>().increment(),
                       child: const Icon(Icons.add),
                     ),
                   ),
@@ -368,7 +368,7 @@ void main() {
                   floatingActionButton: Builder(
                     builder: (context) => FloatingActionButton(
                       onPressed: () =>
-                          context.getHako<_TestListHako>().setIdentical(),
+                          context.readHako<_TestListHako>().setIdentical(),
                       child: const Icon(Icons.refresh),
                     ),
                   ),
@@ -419,7 +419,7 @@ void main() {
                   floatingActionButton: Builder(
                     builder: (context) => FloatingActionButton(
                       onPressed: () =>
-                          context.getHako<_TestListHako>().setSameContent(),
+                          context.readHako<_TestListHako>().setSameContent(),
                       child: const Icon(Icons.copy),
                     ),
                   ),
@@ -482,7 +482,7 @@ void main() {
                   floatingActionButton: Builder(
                     builder: (context) => FloatingActionButton(
                       onPressed: () =>
-                          context.getHako<_TestCounterHako>().increment(),
+                          context.readHako<_TestCounterHako>().increment(),
                       child: const Icon(Icons.add),
                     ),
                   ),
@@ -673,7 +673,7 @@ void main() {
       );
 
       testWidgets(
-        'should not interfere with getHako calls in same widget',
+        'should not interfere with readHako calls in same widget',
         (tester) async {
           // Arrange
           final testHako = _TestCounterHako();
@@ -689,7 +689,7 @@ void main() {
                   builder: (context) {
                     watchedCount =
                         context.watchHakoState<_TestCounterHako, int>();
-                    getCount = context.getHako<_TestCounterHako>().count;
+                    getCount = context.readHako<_TestCounterHako>().count;
                     return Text('Watched: $watchedCount, Get: $getCount');
                   },
                 ),
@@ -799,7 +799,7 @@ void main() {
                 floatingActionButton: Builder(
                   builder: (context) => FloatingActionButton(
                     onPressed: () =>
-                        context.getHako<_TestCounterHako>().increment(),
+                        context.readHako<_TestCounterHako>().increment(),
                     child: const Icon(Icons.add),
                   ),
                 ),
@@ -865,7 +865,7 @@ void main() {
                 floatingActionButton: Builder(
                   builder: (context) => FloatingActionButton(
                     onPressed: () =>
-                        context.getHako<_TestCounterHako>().increment(),
+                        context.readHako<_TestCounterHako>().increment(),
                     child: const Icon(Icons.add),
                   ),
                 ),
@@ -999,7 +999,7 @@ void main() {
                 floatingActionButton: Builder(
                   builder: (context) => FloatingActionButton(
                     onPressed: () =>
-                        context.getHako<_TestCounterHako>().increment(),
+                        context.readHako<_TestCounterHako>().increment(),
                     child: const Icon(Icons.add),
                   ),
                 ),
@@ -1214,7 +1214,7 @@ void main() {
                 ),
                 floatingActionButton: Builder(
                   builder: (context) => FloatingActionButton(
-                    onPressed: () => context.getHako<_TestComplexHako>(),
+                    onPressed: () => context.readHako<_TestComplexHako>(),
                     child: const Icon(Icons.add),
                   ),
                 ),
@@ -1349,7 +1349,7 @@ void main() {
                         FloatingActionButton(
                           heroTag: 'increment',
                           onPressed: () =>
-                              context.getHako<_TestCounterHako>().increment(),
+                              context.readHako<_TestCounterHako>().increment(),
                           child: const Icon(Icons.add),
                         ),
                         const SizedBox(height: 8),

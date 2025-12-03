@@ -142,7 +142,7 @@ void main() {
                 },
                 child: Builder(
                   builder: (context) {
-                    final hako = context.getHako<_TestCounterHako>();
+                    final hako = context.readHako<_TestCounterHako>();
                     return Text('${hako.hashCode}');
                   },
                 ),
@@ -286,7 +286,7 @@ void main() {
                 value: testHako,
                 child: Builder(
                   builder: (context) {
-                    retrievedHako = context.getHako<_TestCounterHako>();
+                    retrievedHako = context.readHako<_TestCounterHako>();
                     return Text('${retrievedHako.hashCode}');
                   },
                 ),

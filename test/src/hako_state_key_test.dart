@@ -8,7 +8,7 @@ void main() {
       test('should create an instance with a Type and null name', () {
         // Arrange & Act
         const type = Map<String, List<double>>;
-        const name = null as String?;
+        const String? name = null;
         const key = (type, name);
 
         // Assert

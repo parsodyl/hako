@@ -128,6 +128,9 @@ abstract class BaseHako
 
   VoidCallback? _onSetCalled;
 
+  @visibleForTesting
+  set onSetCalled(VoidCallback? value) => _onSetCalled = value;
+
   bool _hasKey<T>([String? name]) => _stateMap.containsKey((T, name));
 
   void _registerInitialState<T>(T value, {String? name}) {
@@ -227,7 +230,7 @@ class _HakoNotifier<H extends BaseHako> extends ChangeNotifier {
   final bool doNotDispose;
 
   _HakoNotifier(H hako, this.doNotDispose) : _hako = hako {
-    _hako._onSetCalled = notifyListeners;
+    _hako.onSetCalled = notifyListeners;
   }
 
   @override
@@ -235,7 +238,7 @@ class _HakoNotifier<H extends BaseHako> extends ChangeNotifier {
     if (!doNotDispose) {
       _hako.dispose();
     }
-    _hako._onSetCalled = null;
+    _hako.onSetCalled = null;
     super.dispose();
   }
 }

@@ -43,8 +43,8 @@ class CounterPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // use getHako to access the container for method calls.
-        onPressed: () => context.getHako<CounterHako>().increment(),
+        // use readHako to access the container for method calls.
+        onPressed: () => context.readHako<CounterHako>().increment(),
         child: const Icon(Icons.add),
       ),
     );

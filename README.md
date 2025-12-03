@@ -80,7 +80,7 @@ Use the `BuildContext` extensions to access and listen to your state.
 
 - `context.watchHakoState<H,T>()`: Listens to a specific piece of state and rebuilds the widget when it changes.
 
-- `context.getHako<H>()`: Gets the `Hako` container instance without listening to state changes, perfect for calling methods.
+- `context.readHako<H>()`: Gets the `Hako` container instance without listening to state changes, perfect for calling methods.
 
 ```dart
 class CounterPage extends StatelessWidget {
@@ -100,8 +100,8 @@ class CounterPage extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        // use getHako to access the container for method calls.
-        onPressed: () => context.getHako<CounterHako>().increment(),
+        // use readHako to access the container for method calls.
+        onPressed: () => context.readHako<CounterHako>().increment(),
         child: const Icon(Icons.add),
       ),
     );

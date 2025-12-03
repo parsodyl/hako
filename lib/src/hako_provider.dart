@@ -105,7 +105,7 @@ class HakoProvider<H extends BaseHako>
 /// three main capabilities:
 ///
 /// 1. **Direct Access**: Get a Hako instance to call methods without listening
-///    for changes using [getHako].
+///    for changes using [readHako].
 /// 2. **Reactive Watching**: Subscribe to state changes and automatically
 ///    rebuild widgets when state values change using [watchHakoState].
 /// 3. **Filtered Watching**: Subscribe to derived/transformed state values
@@ -114,13 +114,13 @@ class HakoProvider<H extends BaseHako>
 /// ## Usage Patterns
 ///
 /// ### Getting Hako Instances
-/// Use [getHako] when you need to call methods on a Hako instance or access
+/// Use [readHako] when you need to call methods on a Hako instance or access
 /// properties without triggering widget rebuilds:
 ///
 /// ```dart
 /// // In a button's onPressed callback
 /// onPressed: () {
-///   final counterHako = context.getHako<CounterHako>();
+///   final counterHako = context.readHako<CounterHako>();
 ///   counterHako.increment(); // Calls method without rebuilding this widget
 /// }
 /// ```
@@ -167,7 +167,7 @@ class HakoProvider<H extends BaseHako>
 ///
 /// ## Performance Considerations
 ///
-/// - [getHako] does not create subscriptions and won't trigger rebuilds
+/// - [readHako] does not create subscriptions and won't trigger rebuilds
 /// - [watchHakoState] uses hash-based comparison and may rebuild on reference
 ///   changes even with identical content
 /// - [filterHakoState] uses content-based comparison and provides more
@@ -193,7 +193,7 @@ extension HakoBuildContextExtension on BuildContext {
   ///
   /// Throws a [HakoProviderNotFoundException] if no [HakoProvider] of type [H]
   /// is found in the widget tree.
-  H getHako<H extends BaseHako>() {
+  H readHako<H extends BaseHako>() {
     try {
       return read<_HakoNotifier<H>>()._hako;
     } on ProviderNotFoundException catch (e) {
