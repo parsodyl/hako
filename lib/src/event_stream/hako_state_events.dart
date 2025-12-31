@@ -6,10 +6,10 @@ abstract class HakoStateEvent<T> extends HakoEvent {
   /// optional name.
   ///
   /// [T] The type of the state value.
-  /// [state] The current state value involved in the event.
+  /// [current] The current state value involved in the event.
   /// [name] An optional identifier for the state value. Used when multiple
   /// state values of the same type need to be distinguished.
-  const HakoStateEvent(this.state, {String? name}) : key = (T, name);
+  const HakoStateEvent(this.current, {String? name}) : key = (T, name);
 
   /// The unique identifier key for the state value involved in the event.
   ///
@@ -23,7 +23,7 @@ abstract class HakoStateEvent<T> extends HakoEvent {
   /// This contains the state value at the time the event was created.
   /// The type [T] corresponds to the registered type of the state value
   /// in the container.
-  final T state;
+  final T current;
 
   /// Returns the optional name identifier for the state value.
   ///
@@ -49,14 +49,14 @@ class GetEvent<T> extends HakoStateEvent<T> {
   /// name.
   ///
   /// [T] The type of the state value.
-  /// [state] The state value that was retrieved from the Hako container.
+  /// [current] The state value that was retrieved from the Hako container.
   /// [name] An optional identifier for the state value. Used when multiple
   /// state values of the same type need to be distinguished.
-  const GetEvent(super.state, {super.name});
+  const GetEvent(super.current, {super.name});
 
   @override
   String toString() {
-    return 'GetEvent{key: $key, state: $state}';
+    return 'GetEvent{key: $key, current: $current}';
   }
 
   @override
@@ -65,10 +65,10 @@ class GetEvent<T> extends HakoStateEvent<T> {
       other is GetEvent &&
           runtimeType == other.runtimeType &&
           key == other.key &&
-          state == other.state;
+          current == other.current;
 
   @override
-  int get hashCode => Object.hash(key, state);
+  int get hashCode => Object.hash(key, current);
 }
 
 /// An event that represents the modification of a state value in a Hako
@@ -87,10 +87,10 @@ class SetEvent<T> extends HakoStateEvent<T> {
   ///
   /// [T] The type of the state value.
   /// [previous] The state value that existed before the update operation.
-  /// [state] The new state value that was set in the Hako container.
+  /// [current] The new state value that was set in the Hako container.
   /// [name] An optional identifier for the state value. Used when multiple
   /// state values of the same type need to be distinguished.
-  const SetEvent(this.previous, super.state, {super.name});
+  const SetEvent(this.previous, super.current, {super.name});
 
   /// The state value that existed before the update operation.
   ///
@@ -101,7 +101,7 @@ class SetEvent<T> extends HakoStateEvent<T> {
 
   @override
   String toString() {
-    return 'SetEvent{key: $key, previous: $previous, state: $state}';
+    return 'SetEvent{key: $key, previous: $previous, current: $current}';
   }
 
   @override
@@ -110,9 +110,9 @@ class SetEvent<T> extends HakoStateEvent<T> {
       other is SetEvent &&
           runtimeType == other.runtimeType &&
           key == other.key &&
-          state == other.state &&
+          current == other.current &&
           previous == other.previous;
 
   @override
-  int get hashCode => Object.hash(key, previous, state);
+  int get hashCode => Object.hash(key, previous, current);
 }

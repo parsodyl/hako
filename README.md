@@ -122,7 +122,7 @@ final stream = myHako.openEventStream();
 // (b) listen to the stream of events.
 stream.listen((event) {
   if (event is SetEvent) {
-    print('State changed: key=${event.key}, previous=${event.previous}, new=${event.state}');
+    print('State changed: key=${event.key}, previous=${event.previous}, new=${event.current}');
   }
 });
 

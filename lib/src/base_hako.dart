@@ -38,9 +38,9 @@ typedef RegisterCallback = void Function<T>(T value, {String? name});
 /// - **[GetEvent]**: Emitted when state is accessed via `get<T>()`
 /// - **[SetEvent]**: Emitted when state is modified via `set<T>()`
 ///
-/// Events are only emitted when `isEventStreamOpen` returns `true`. The event
-/// stream can be controlled through the [HakoEventStreamMixin] methods and is
-/// automatically closed when `dispose()` is called.
+/// Events are only emitted when [isEventStreamOpen] returns `true`. The event
+/// stream can be controlled through [openEventStream] and [closeEventStream]
+/// methods, and is automatically closed when `dispose()` is called.
 ///
 /// Example usage for testing or debugging:
 /// ```dart
@@ -48,7 +48,7 @@ typedef RegisterCallback = void Function<T>(T value, {String? name});
 /// final stream = hako.openEventStream();
 /// stream.listen((event) {
 ///   if (event is SetEvent<int>) {
-///     print('Counter changed from ${event.previous} to ${event.state}');
+///     print('Counter changed from ${event.previous} to ${event.current}');
 ///   }
 /// });
 /// ```
@@ -74,7 +74,15 @@ typedef RegisterCallback = void Function<T>(T value, {String? name});
 /// when registering, accessing, and modifying a specific state value.
 ///
 /// Unnamed state (where name is `null`) and named state of the same type
-/// are treated as completely separate and independent state values.
+/// are treated as completely separate and independent state values:
+///
+/// ```dart
+/// // no issues with the following:
+///   CounterHako() : super((register) {
+///     register<int>(0);
+///     register<int>(0, name: 'count');
+///   });
+/// ```
 ///
 /// ## Error handling
 ///

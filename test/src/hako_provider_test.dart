@@ -127,7 +127,7 @@ void main() {
         },
       );
       testWidgets(
-        'should lazily create the Hako instance when getHako() is called',
+        'should lazily create the Hako instance when readHako() is called',
         (tester) async {
           // Arrange
           _TestCounterHako? createdInstance;

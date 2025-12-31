@@ -1018,9 +1018,9 @@ void main() {
             stream,
             emitsInOrder([
               predicate<GetEvent<String>>((event) =>
-                  event.key == (String, null) && event.state == 'unnamed'),
+                  event.key == (String, null) && event.current == 'unnamed'),
               predicate<GetEvent<String>>((event) =>
-                  event.key == (String, 'special') && event.state == 'named'),
+                  event.key == (String, 'special') && event.current == 'named'),
               emitsDone,
             ]),
           );
@@ -1303,12 +1303,12 @@ void main() {
             emitsInOrder([
               predicate<SetEvent<List<String>>>((event) =>
                   listEquals<String>(event.previous, ['a', 'b']) &&
-                  listEquals<String>(event.state, ['a', 'b']) &&
-                  !identical(event.previous, event.state)),
+                  listEquals<String>(event.current, ['a', 'b']) &&
+                  !identical(event.previous, event.current)),
               predicate<SetEvent<Map<String, int>>>((event) =>
                   mapEquals<String, int>(event.previous, {'key': 1}) &&
-                  mapEquals<String, int>(event.state, {'key': 1}) &&
-                  !identical(event.previous, event.state)),
+                  mapEquals<String, int>(event.current, {'key': 1}) &&
+                  !identical(event.previous, event.current)),
               emitsDone,
             ]),
           );
@@ -1336,11 +1336,11 @@ void main() {
               predicate<SetEvent<String>>((event) =>
                   event.key == (String, null) &&
                   event.previous == 'unnamed' &&
-                  event.state == 'updated unnamed'),
+                  event.current == 'updated unnamed'),
               predicate<SetEvent<String>>((event) =>
                   event.key == (String, 'special') &&
                   event.previous == 'named' &&
-                  event.state == 'updated named'),
+                  event.current == 'updated named'),
               emitsDone,
             ]),
           );
