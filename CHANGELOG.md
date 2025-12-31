@@ -1,3 +1,9 @@
+## 0.0.4
+
+* Renamed ~~`getHako`~~ to `readHako`.
+* Renamed ~~`HakoStateEvent.state`~~ to `HakoStateEvent.current`.
+* Made `onSetCalled` setter visible for testing.
+
 ## 0.0.3
 
 * Renamed ~~`ValueGetEvent`~~ to `GetEvent` and ~~`ValueSetEvent`~~ to `SetEvent`.
