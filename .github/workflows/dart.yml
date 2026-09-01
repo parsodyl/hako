@@ -1,8 +1,3 @@
-# This workflow uses actions that are not certified by GitHub.
-# They are provided by a third-party and are governed by
-# separate terms of service, privacy policy, and support
-# documentation.
-
 name: Dart
 
 on:
@@ -31,8 +26,23 @@ jobs:
        with:
           channel: stable
 
-     - name: 📥 Get dependencies
+     - name: 📥 Get dependencies (packages/hako)
+       working-directory: packages/hako
        run: flutter pub get
 
-     - name: ✅ Run tests
+     - name: 📥 Get dependencies (packages/hako_test)
+       working-directory: packages/hako_test
+       run: flutter pub get
+
+     - name: 🔍 Analyze packages
+       run: |
+         cd packages/hako && flutter analyze
+         cd ../hako_test && flutter analyze
+
+     - name: ✅ Run tests (packages/hako)
+       working-directory: packages/hako
+       run: flutter test --coverage
+
+     - name: ✅ Run tests (packages/hako_test)
+       working-directory: packages/hako_test
        run: flutter test --coverage
