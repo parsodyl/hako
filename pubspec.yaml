@@ -1,8 +1,28 @@
-name: hako_workspace
+name: hako_monorepo
+publish_to: none
+
 environment:
   sdk: ">=3.5.0 <4.0.0"
-  flutter: ">=3.24.0"
 
 workspace:
   - packages/hako
   - packages/hako_test
+
+dev_dependencies:
+  melos: ^8.6.0
+
+melos:
+  scripts:
+    analyze:
+      exec: flutter analyze .
+      description: Run `flutter analyze` across all packages.
+
+    test:
+      exec: flutter test --coverage
+      packageFilters:
+        dirExists: test
+      description: Run `flutter test` across all packages.
+
+    format:
+      exec: dart format .
+      description: Format Dart code across all packages.

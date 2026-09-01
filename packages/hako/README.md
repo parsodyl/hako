@@ -140,5 +140,13 @@ For detailed API documentation and examples, visit:
 - [HakoProvider Class](https://pub.dev/documentation/hako/latest/hako/HakoProvider-class.html) - Widget for providing Hako instances to the widget tree
 - [HakoBuildContextExtension](https://pub.dev/documentation/hako/latest/hako/HakoBuildContextExtension.html) - Extension methods for accessing Hako state in widgets
 
-# Contribute
+## Testing
+
+For testing Hako state containers, declarative assertions, and event stream verification, check out the official companion testing library:
+
+- [`hako_test`](https://pub.dev/packages/hako_test) — Testing utilities, `hakoTest` declarative test runner, and custom event matchers for Hako.
+
+## Contribute
+
 If you find a bug, or you would like to see a new feature, please create an issue.
+

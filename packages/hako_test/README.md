@@ -14,14 +14,14 @@ Add `hako_test` to your `dev_dependencies` in `pubspec.yaml`:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  hako_test: ^0.0.1
+  hako_test: ^[LATEST_VERSION]
 ```
 
 ---
 
 ## Features
 
-- **`hakoTest`**: A declarative test runner (similar to `blocTest`) that automates setup, action execution, event assertion, state verification, and resource disposal.
+- **`hakoTest`**: A declarative test runner that automates setup, action execution, event assertion, state verification, and resource disposal.
 - **`expectHakoEmits`**: Stream assertion utility to assert event sequences in order with guaranteed cleanup.
 - **Match helper functions**: Type-safe matchers including `isGetEvent<T>()` and `isSetEvent<T>()`.
 
