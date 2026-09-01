@@ -15,7 +15,7 @@ jobs:
        uses: actions/checkout@v4
 
      - name: 🚀 Cache pub deps
-       uses: actions/cache@v3
+       uses: actions/cache@v4
        with:
           path: ~/.pub-cache
           key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
@@ -25,9 +25,12 @@ jobs:
        uses: subosito/flutter-action@v2
        with:
           channel: stable
+          cache: true
 
      - name: 🛠️ Activate Melos
-       run: dart pub global activate melos
+       run: |
+         dart pub global activate melos
+         echo "$HOME/.pub-cache/bin" >> $GITHUB_PATH
 
      - name: 📥 Bootstrap Workspace
        run: melos bootstrap
