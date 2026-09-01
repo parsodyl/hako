@@ -1,25 +1,28 @@
-name: hako
-description: "A state management library for Flutter designed for simplicity, performance, and testability."
-version: 0.0.4
-repository: https://github.com/parsodyl/hako
-issue_tracker: https://github.com/parsodyl/hako/issues
-
-topics:
-  - state-management
-  - provider
-  - hako
+name: hako_monorepo
+publish_to: none
 
 environment:
-  sdk: ">=3.1.0 <4.0.0"
-  flutter: ">=3.13.0"
+  sdk: ">=3.5.0 <4.0.0"
 
-dependencies:
-  provider: ^6.1.5
-
-  flutter:
-    sdk: flutter
+workspace:
+  - packages/hako
+  - packages/hako_test
 
 dev_dependencies:
-  flutter_test:
-    sdk: flutter
-  flutter_lints: ^4.0.0
+  melos: ^8.6.0
+
+melos:
+  scripts:
+    analyze:
+      exec: flutter analyze .
+      description: Run `flutter analyze` across all packages.
+
+    test:
+      exec: flutter test --coverage
+      packageFilters:
+        dirExists: test
+      description: Run `flutter test` across all packages.
+
+    format:
+      exec: dart format .
+      description: Format Dart code across all packages.
