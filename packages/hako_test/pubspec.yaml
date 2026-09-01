@@ -19,7 +19,7 @@ dependencies:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  hako: ^0.0.4
+  hako: ^0.1.0
   meta: ^1.11.0
 
 dev_dependencies:
