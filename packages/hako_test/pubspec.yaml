@@ -1,9 +1,8 @@
 name: hako_test
 description: "A testing library for Hako state management, making it easy to test Hako state containers and event streams."
-version: 0.0.1
+version: 0.0.2
 repository: https://github.com/parsodyl/hako/tree/main/packages/hako_test
 issue_tracker: https://github.com/parsodyl/hako/issues
-resolution: workspace
 
 topics:
   - testing
@@ -11,15 +10,15 @@ topics:
   - hako
 
 environment:
-  sdk: ">=3.5.0 <4.0.0"
-  flutter: ">=3.24.0"
+  sdk: ">=3.1.0 <4.0.0"
+  flutter: ">=3.13.0"
 
 dependencies:
   flutter:
     sdk: flutter
   flutter_test:
     sdk: flutter
-  hako: ^0.1.0
+  hako: ^0.1.1
   meta: ^1.11.0
 
 dev_dependencies:

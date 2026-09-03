@@ -1,3 +1,7 @@
+## 0.1.1
+
+* **SDK Compatibility**: Restored minimum Dart SDK constraint to `>=3.1.0` (Flutter `>=3.13.0`).
+
 ## 0.1.0
 
 * **First Stable Minor Release**: Marks the transition from initial `0.0.x` experimental versions to `0.1.0`, establishing a stable and production-ready core API.

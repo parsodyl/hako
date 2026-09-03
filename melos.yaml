@@ -1,17 +1,8 @@
 name: hako_monorepo
 
 packages:
-  - packages/**
+  - packages/*
 
-scripts:
-  analyze:
-    run: melos exec -- flutter analyze .
-    description: Run `flutter analyze` across all packages.
-
-  test:
-    run: melos exec --dir-exists="test" -- flutter test --coverage
-    description: Run `flutter test` across all packages.
-
-  format:
-    run: melos exec -- dart format . --fix
-    description: Format Dart code across all packages.
+command:
+  bootstrap:
+    usePubspecOverrides: true
